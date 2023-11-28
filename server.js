@@ -1,5 +1,5 @@
 const express = require ('express')
-const userrouter = require('./router/users')
+const ekskulrouter = require('./router/ekskuls')
 const app = express()
 const port = 3000
 const connectDB = require('./config/db')
@@ -11,7 +11,7 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-app.use(userrouter)
+app.use(ekskulrouter)
 
 connectDB()
 

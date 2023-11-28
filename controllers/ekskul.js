@@ -1,11 +1,11 @@
-const User = require('../models/User')
+const Ekskul = require('../models/Ekskul')
 
 module.exports = {
     //semua user
     index: async (req, res) => {
         try{
-            const users = await User.find()
-            res.json(users);
+            const ekskuls = await Ekskul.find()
+            res.json(ekskuls);
             // if(users.length > 0){
             //     res.status(200).json({
             //         status: true,
@@ -27,10 +27,10 @@ module.exports = {
     // user berdasar id 
     show:  async (req, res) => {
         try {
-            const user = await User.findById(req.params.id)
+            const ekskul = await Ekskul.findById(req.params.id)
             res.json({
                 status: true,
-                data: user,
+                data: ekskul,
                 method: req.method,
                 url: req.url,
                 message: "Data didapatkan"
@@ -43,27 +43,27 @@ module.exports = {
     
     store: async (req, res) => {
         try {
-            const user = await User.create(req.body)
+            const ekskul = await Ekskul.create(req.body)
             res.status(200).json({
                 status: true,
-                data: user,
+                data: ekskul,
                 method: req.method,
                 url: req.url,
                 message: "Data Udah Ditambahin"
             }) 
         } catch (error) {
-            res.status(400).json({success: false})
+            res.status(400).json({success: false, message: error.message})
         }
     },
     update:  async (req, res) => {
         try {
-            const user = await User.findByIdAndUpdate(req.params.id, req.body,{
+            const ekskul = await Ekskul.findByIdAndUpdate(req.params.id, req.body,{
                 new: true,
                 runValidators:true
             })
             res.json({
                 status: true,
-                data: user,
+                data: ekskul,
                 method: req.method,
                 url: req.url,
                 message: "Data Udah Berubah"
@@ -75,7 +75,7 @@ module.exports = {
     },
     delete: async (req, res) => {
         try {
-            await User.findByIdAndDelete(req.params.id)
+            await Ekskul.findByIdAndDelete(req.params.id)
             res.json({
                 status: true,
                 method: req.method,
